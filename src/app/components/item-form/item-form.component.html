@@ -1,0 +1,25 @@
+<div class="container">
+  <h2>{{ isEditMode ? 'Edit Item' : 'Add New Item' }}</h2>
+  <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" id="name" formControlName="name">
+      <div *ngIf="itemForm.get('name')?.invalid && itemForm.get('name')?.touched" class="error">
+        Name is required
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" formControlName="description"></textarea>
+      <div *ngIf="itemForm.get('description')?.invalid && itemForm.get('description')?.touched" class="error">
+        Description is required
+      </div>
+    </div>
+
+    <div class="form-buttons">
+      <button type="button" routerLink="/">Cancel</button>
+      <button type="submit" [disabled]="itemForm.invalid">{{ isEditMode ? 'Update' : 'Add' }}</button>
+    </div>
+  </form>
+</div>
